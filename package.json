@@ -1,0 +1,20 @@
+{
+  "name": "catouni",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cryptr": "^4.0.2",
+    "express": "^4.17.1",
+    "kavenegar": "^1.1.4",
+    "mongoose": "^5.6.9",
+    "multer": "^1.4.2",
+    "object-sizeof": "^1.5.2",
+    "socket.io": "^2.3.0"
+  }
+}
