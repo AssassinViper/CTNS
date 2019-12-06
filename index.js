@@ -34,7 +34,7 @@ app.use(Express.json({limit:env.REQUEST_SIZE_LIMIT})) // for parsing application
 app.use(Express.urlencoded({extended: false, limit:env.REQUEST_SIZE_LIMIT})) // for parsing application/x-www-form-urlencoded
 
 // logger for each request
-if(env.DEVELOP_MODE){
+if(env.LOG){
     app.use(Log);
 }
 
