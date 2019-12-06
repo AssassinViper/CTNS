@@ -3,12 +3,13 @@ const Consts = require('../consts');
 const Kavenegar = require('kavenegar');
 const env = require('../env.json');
 const Cryptr = require('cryptr');
+const https = require("https");
 
 const cryptr = new Cryptr(env.ENCRYPT_KEY);
 
 const api = Kavenegar.KavenegarApi({apikey:env.SMS_API});
 
-const RegisterHandler = (req, res)=>{
+const RegisterHandler = async (req, res)=>{
 
     let ans = RegisterHandler_rc(req.body);
 
@@ -16,7 +17,7 @@ const RegisterHandler = (req, res)=>{
 
         let phone_number = req.body.phone_number;
 
-        User.find({phone_number_dcr:phone_number},(err, data)=>{
+        User.find({phone_number_dcr:phone_number}, async (err, data)=>{
 
             if(err){
                 
@@ -26,7 +27,7 @@ const RegisterHandler = (req, res)=>{
             
             }else{
 
-                sendVerificationCode(phone_number, data[0], (ans2)=>{
+                await sendVerificationCode(phone_number, data[0], (ans2)=>{
                     
                     if(data[0] && ans2 == Consts.SUCCESS){
                         // if phone number exists
@@ -60,7 +61,7 @@ const RegisterHandler_rc = (body)=>{
     return Consts.SUCCESS;
 }
 
-const sendVerificationCode = (phone_number, user ,cb)=>{
+const sendVerificationCode = async (phone_number, user ,cb)=>{
 
     let random = Math.floor(Math.random()*10000);
     if(random < 1500){random+=1500}
@@ -75,7 +76,7 @@ const sendVerificationCode = (phone_number, user ,cb)=>{
 
     if(!env.DEVELOP_MODE){
 
-        kavenegarVerify(phone_number, verification_code);
+        await kavenegarVerify(phone_number, verification_code);
         //kavenegarSender(phone_number, message);
     }
 
@@ -121,12 +122,20 @@ const kavenegarSender = (phone_number, message)=>{
     api.Send({ message , sender: "1000596446" , receptor:phone_number});
 }
 
-const kavenegarVerify = (phone_number, token)=>{
+const kavenegarVerify = async(phone_number, token)=>{
 
     let api_key = env.SMS_API;
     let template = env.SMS_TEMPLATE;
+
+    let new_req = https.request({
+        hostname: 'api.kavenegar.com',
+        port: 443,
+        path: `/v1/${api_key}/verify/lookup.json?receptor=${phone_number}&token=${token}&template=${template}`,
+        method: 'GET',
+        });
+
+    new_req.end();
     
-    fetch(`https://api.kavenegar.com/v1/${api_key}/verify/lookup.json?receptor=${phone_number}&token=${token}&template=${template}`)
 }
 
 module.exports = RegisterHandler;
