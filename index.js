@@ -38,12 +38,6 @@ if(env.LOG){
     app.use(Log);
 }
 
-app.get("/", (req, res)=>{
-    fs.readFile('client/build/index.html', (err, data)=>{
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.send(data);
-    })
-  })
 ////////////////////////////////////////////////////////////////////
 
 app.post(Routes.REGISTER, RequestHandler.RegisterHandler);
@@ -109,6 +103,15 @@ app.post(Routes.ADMIN_DELETE_STATION, AdminAuth, AdminHandlers.DeleteStaionHandl
 app.post(Routes.ADMIN_WEEKLY_INFO, AdminAuth, AdminHandlers.WeeklyInfoHandler);
 
 app.post(Routes.ADMIN_EDIT_WEEKLY, upload_temp.single('file'), AdminAuth, AdminHandlers.EditWeeklyHandler);
+
+////////////////////////////////////////////////////////////////////
+
+app.get("*", (req, res)=>{
+    fs.readFile('client/build/index.html', (err, data)=>{
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.send(data);
+    })
+  })
 
 ////////////////////////////////////////////////////////////////////
 
