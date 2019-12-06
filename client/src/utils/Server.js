@@ -2,7 +2,7 @@ const Server = {
 
     //domain:"http://89.32.251.101:4054",
     //domain:"http://192.168.1.33:4054",
-    domain:"http://127.0.0.1:4054",
+    domain:"http://171.22.27.172:4054",
 
     urls:{
         
