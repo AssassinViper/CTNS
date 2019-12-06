@@ -9,6 +9,7 @@ const AdminHandlers = require('./adminHandlers');
 const multer = require('multer');
 const SocketPool = require('./utilities/SocketPool');
 const SocketHandlers = require("./socketHandlers");
+const path = require("path");
 const fs = require('fs');
 
 ////////////////////////////////////////////////////////////////////
@@ -107,11 +108,9 @@ app.post(Routes.ADMIN_EDIT_WEEKLY, upload_temp.single('file'), AdminAuth, AdminH
 ////////////////////////////////////////////////////////////////////
 
 app.get("*", (req, res)=>{
-    fs.readFile('client/build/index.html', (err, data)=>{
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.send(data);
-    })
-  })
+
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+})
 
 ////////////////////////////////////////////////////////////////////
 
