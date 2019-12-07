@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import bg from '../assets/images/rasht.png'
+import App from '../App';
 import Consts from '../utils/Consts';
 import {withRouter} from "react-router-dom";
 
@@ -7,7 +8,7 @@ class Home extends Component {
 
     componentDidMount(){
         let con = document.getElementsByClassName("App")[0];
-        con.style.backgroundImage = `url(${bg})`
+        App.instance.changeBG(bg);
     }
 
     admin = ()=>{
