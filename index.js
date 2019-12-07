@@ -107,6 +107,11 @@ app.post(Routes.ADMIN_EDIT_WEEKLY, upload_temp.single('file'), AdminAuth, AdminH
 
 ////////////////////////////////////////////////////////////////////
 
+app.get("/favicon.ico", (req,res)=>{
+
+    res.sendFile(path.join(__dirname+ "/client/build/favicon.ico"));
+})
+
 app.get("*", (req, res)=>{
 
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
