@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import bg from '../assets/images/rasht.png'
+import bg from '../assets/images/rasht.jpg'
 import App from '../App';
 import Consts from '../utils/Consts';
 import {withRouter} from "react-router-dom";
