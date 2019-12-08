@@ -13,6 +13,14 @@ class Authentication extends Component {
     componentDidMount(){
 
         App.instance.changeBG(bg2);
+
+        this.auth_page.addEventListener("keyup", (event)=>{
+
+            if (event.keyCode === 13) {
+                this.login();
+            }
+        })
+
     }
 
     onPhone = (ev)=>{
@@ -46,7 +54,7 @@ class Authentication extends Component {
 
     render() {
         return (
-            <div style={s.con} onb>
+            <div style={s.con} ref={r=>this.auth_page = r}>
 
                 <div style={s.sec1}>
 
