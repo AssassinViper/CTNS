@@ -29,10 +29,10 @@ const MapStationsHandler_rc = (body)=>{
     body.token = body.token?body.token.toString():"";
     body.city = body.city?body.city.toString():"";
 
-    if(body.token.length < 20){
+    // if(body.token.length < 20){
 
-        return Consts.INVALID_TOKEN;
-    }
+    //     return Consts.INVALID_TOKEN;
+    // }
 
     if(body.city.length < 0){
 

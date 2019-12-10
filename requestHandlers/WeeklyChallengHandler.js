@@ -10,9 +10,10 @@ const WeeklyChallengHandler = async (req, res)=>{
 
         let token = req.body.token;
 
-        let user = await User.findOne({_id:token});
+        //let user = await User.findOne({_id:token});
 
-        if(user){
+        //if(user){
+        if(true){
 
             let challenges = await Challenge.find({type:"weekly", online:true});
 
@@ -40,10 +41,10 @@ const WeeklyChallengHandler_rc = (body)=>{
 
     body.token = body.token?body.token.toString():"";
 
-    if(body.token.length < 20){
+    // if(body.token.length < 20){
         
-        return Consts.INVALID_TOKEN;
-    }
+    //     return Consts.INVALID_TOKEN;
+    // }
 
     return Consts.SUCCESS;
 }
